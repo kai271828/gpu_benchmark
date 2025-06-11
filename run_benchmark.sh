@@ -16,7 +16,7 @@ for precision in fp32 fp16 bf16; do
         python run_benchmark.py \
             --task $task \
             --precision $precision \
-            --device cuda \
+            --device cuda
         echo ""
         echo ""
     done

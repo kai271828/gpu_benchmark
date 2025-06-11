@@ -90,7 +90,7 @@ Install packages through pip.
 
 ### Installation
 
-Install packages through pip.
+Install packages through pip or conda.
 
 1. Clone the repo
    ```sh
@@ -98,8 +98,16 @@ Install packages through pip.
    cd gpu_benchmark
    ```
 2. Install packages
+   
+   **Option 1: Using pip**
    ```sh
    pip install -r requirements.txt
+   ```
+   
+   **Option 2: Using conda environment.yaml**
+   ```sh
+   conda env create -f environment.yaml
+   conda activate gpu_benchmark
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -141,12 +149,12 @@ Remember the performance may differ on different machines due to various hardwar
 | RTX 3090 Ti | Yes | FP32 | - | - | - |
 | RTX 3090 Ti | Yes | FP16 | - | - | - |
 | RTX 3090 Ti | Yes | BF16 | - | - | - |
-| V100 | No | FP32 | - | - | - |
-| V100 | No | FP16 | - | - | - |
-| V100 | No | BF16 | - | - | - |
-| V100 | Yes | FP32 | - | - | - |
-| V100 | Yes | FP16 | - | - | - |
-| V100 | Yes | BF16 | - | - | - |
+| Tesla V100 | No | FP32 | - | - | - |
+| Tesla V100 | No | FP16 | - | - | - |
+| Tesla V100 | No | BF16 | - | - | - |
+| Tesla V100 | Yes | FP32 | - | - | - |
+| Tesla V100 | Yes | FP16 | - | - | - |
+| Tesla V100 | Yes | BF16 | - | - | - |
 
 *Note: Results are measured in samples processed per second during training. Higher values indicate better performance.*
 
