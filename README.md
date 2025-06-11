@@ -95,6 +95,7 @@ Install packages through pip.
 1. Clone the repo
    ```sh
    git clone https://github.com/kai271828/gpu_benchmark.git
+   cd gpu_benchmark
    ```
 2. Install packages
    ```sh
