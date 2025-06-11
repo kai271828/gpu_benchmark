@@ -120,16 +120,37 @@ run_benchmark.bat [YOUR_EXPERIMENT_NAME]
 
 
 ## Reference Result
-Remember the performance may differ on different machines.
+Remember the performance may differ on different machines due to various hardware factors including CPU, RAM, storage, and system configuration.
 
-| GPU Model | ResNet50 (samples/sec) | ViT-S (samples/sec) | Swin-v2-T (samples/sec) |
-|-----------|----------------------|-------------------|------------------------|
-| GTX 1080 Ti | - | - | - |
-| RTX 2080 Ti | - | - | - |
-| RTX 3090 Ti | - | - | - |
-| V100 | - | - | - |
+| GPU Model | Compile | Precision | ResNet50 (samples/sec) | ViT-S (samples/sec) | Swin-v2-T (samples/sec) |
+|-----------|---------|-----------|----------------------|-------------------|------------------------|
+| GTX 1080 Ti | No | FP32 | - | - | - |
+| GTX 1080 Ti | No | FP16 | - | - | - |
+| GTX 1080 Ti | Yes | FP32 | - | - | - |
+| GTX 1080 Ti | Yes | FP16 | - | - | - |
+| RTX 2080 Ti | No | FP32 | - | - | - |
+| RTX 2080 Ti | No | FP16 | - | - | - |
+| RTX 2080 Ti | No | BF16 | - | - | - |
+| RTX 2080 Ti | Yes | FP32 | - | - | - |
+| RTX 2080 Ti | Yes | FP16 | - | - | - |
+| RTX 2080 Ti | Yes | BF16 | - | - | - |
+| RTX 3090 Ti | No | FP32 | - | - | - |
+| RTX 3090 Ti | No | FP16 | - | - | - |
+| RTX 3090 Ti | No | BF16 | - | - | - |
+| RTX 3090 Ti | Yes | FP32 | - | - | - |
+| RTX 3090 Ti | Yes | FP16 | - | - | - |
+| RTX 3090 Ti | Yes | BF16 | - | - | - |
+| V100 | No | FP32 | - | - | - |
+| V100 | No | FP16 | - | - | - |
+| V100 | No | BF16 | - | - | - |
+| V100 | Yes | FP32 | - | - | - |
+| V100 | Yes | FP16 | - | - | - |
+| V100 | Yes | BF16 | - | - | - |
 
 *Note: Results are measured in samples processed per second during training. Higher values indicate better performance.*
+
+- **Compile**: Whether PyTorch model compilation is enabled (torch.compile)
+- **Precision**: FP32 (32-bit), FP16 (16-bit), BF16 (Brain Float 16-bit)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
