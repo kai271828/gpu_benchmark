@@ -154,12 +154,7 @@ Remember the performance may differ on different machines due to various hardwar
 | | | FP32 | ❌ | 98.94 | 29.07 | 62.33 |
 | | | FP32 | ✅ | 108.49 | 30.14 | N/A |
 | | | FP16 | ❌ | 215.27 | 118.35 | 112.28 |
-| | | FP16 | ✅ | 358.73 | 136.05 | N/A |
-| **Tesla P100** | 16GB | | | | | |
-| | | FP32 | ❌ | N/A | N/A | N/A |
-| | | FP32 | ✅ | N/A | N/A | N/A |
-| | | FP16 | ❌ | N/A | N/A | N/A |
-| | | FP16 | ✅ | N/A | N/A | N/A |
+| | | FP16 | ✅ | 358.73 | 136.05 | 214.48 |
 | **Tesla V100** | 32GB | | | | | |
 | | | FP32 | ❌ | 368.26 | 105.07 | 209.90 |
 | | | FP32 | ✅ | 392.08 | 110.09 | 271.49 |
