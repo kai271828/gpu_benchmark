@@ -106,7 +106,7 @@ Install packages through pip or conda.
    
    **Option 2: Using conda environment.yaml**
    ```sh
-   conda env create -f environment.yaml
+   conda env create -f environment.yml
    conda activate gpu_benchmark
    ```
 
@@ -131,30 +131,28 @@ run_benchmark.bat [YOUR_EXPERIMENT_NAME]
 ## Reference Result
 Remember the performance may differ on different machines due to various hardware factors including CPU, RAM, storage, and system configuration.
 
-| GPU Model | Compile | Precision | ResNet50 (samples/sec) | ViT-S (samples/sec) | Swin-v2-T (samples/sec) |
-|-----------|---------|-----------|----------------------|-------------------|------------------------|
-| GTX 1080 Ti | No | FP32 | - | - | - |
-| GTX 1080 Ti | No | FP16 | - | - | - |
-| GTX 1080 Ti | Yes | FP32 | - | - | - |
-| GTX 1080 Ti | Yes | FP16 | - | - | - |
-| RTX 2080 Ti | No | FP32 | - | - | - |
-| RTX 2080 Ti | No | FP16 | - | - | - |
-| RTX 2080 Ti | No | BF16 | - | - | - |
-| RTX 2080 Ti | Yes | FP32 | - | - | - |
-| RTX 2080 Ti | Yes | FP16 | - | - | - |
-| RTX 2080 Ti | Yes | BF16 | - | - | - |
-| RTX 3090 Ti | No | FP32 | - | - | - |
-| RTX 3090 Ti | No | FP16 | - | - | - |
-| RTX 3090 Ti | No | BF16 | - | - | - |
-| RTX 3090 Ti | Yes | FP32 | - | - | - |
-| RTX 3090 Ti | Yes | FP16 | - | - | - |
-| RTX 3090 Ti | Yes | BF16 | - | - | - |
-| Tesla V100 | No | FP32 | - | - | - |
-| Tesla V100 | No | FP16 | - | - | - |
-| Tesla V100 | No | BF16 | - | - | - |
-| Tesla V100 | Yes | FP32 | - | - | - |
-| Tesla V100 | Yes | FP16 | - | - | - |
-| Tesla V100 | Yes | BF16 | - | - | - |
+| GPU Model | Memory (GB) | Precision | Compile | ResNet50 (samples/sec) | ViT-S (samples/sec) | Swin-v2-T (samples/sec) |
+|-----------|-------------|-----------|---------|----------------------|-------------------|------------------------|
+| **GTX 1080 Ti** | 11 | FP32 | No | - | - | - |
+| | | FP32 | Yes | - | - | - |
+| | | FP16 | No | - | - | - |
+| | | FP16 | Yes | - | - | - |
+| **RTX 2080 Ti** | 11 | FP32 | No | - | - | - |
+| | | FP32 | Yes | - | - | - |
+| | | FP16 | No | - | - | - |
+| | | FP16 | Yes | - | - | - |
+| **RTX 3090 Ti** | 24 | FP32 | No | - | - | - |
+| | | FP32 | Yes | - | - | - |
+| | | FP16 | No | - | - | - |
+| | | FP16 | Yes | - | - | - |
+| | | BF16 | No | - | - | - |
+| | | BF16 | Yes | - | - | - |
+| **Tesla V100** | 32 | FP32 | No | - | - | - |
+| | | FP32 | Yes | - | - | - |
+| | | FP16 | No | - | - | - |
+| | | FP16 | Yes | - | - | - |
+| | | BF16 | No | - | - | - |
+| | | BF16 | Yes | - | - | - |
 
 *Note: Results are measured in samples processed per second during training. Higher values indicate better performance.*
 

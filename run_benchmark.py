@@ -16,12 +16,8 @@ from utils import (
 
 
 def main(args):
-    torch.backends.cudnn.benchmark = True
-
-    batch_size = get_batch_size(args.task)
-
     # Create log filename based on benchmark parameters
-    log_filename = "benchmark.log"
+    log_filename = f"{args.exp_name}.log"
 
     logging.basicConfig(
         level=logging.INFO,
@@ -32,9 +28,26 @@ def main(args):
         ],
     )
 
-    if torch.cuda.get_device_capability()[0] < 8 and args.precision == "bf16":
-        logging.warning("Your GPU does not support BF16.")
-        exit(1)
+    if torch.cuda.is_available() and args.device == "cuda":
+        if torch.cuda.get_device_capability()[0] < 7 and args.compile_model:
+            logging.error(f"Your GPU does not support model compilation.")
+            exit(1)
+
+        if torch.cuda.get_device_capability()[0] < 8 and args.precision == "bf16":
+            logging.error("Your GPU does not support BF16.")
+            exit(1)
+
+        if torch.cuda.get_device_capability()[0] >= 8:
+            torch.set_float32_matmul_precision("high")
+            logging.info("🚀 Enabled TF32 for faster FP32 operations")
+
+    torch.backends.cudnn.benchmark = True
+
+    batch_size = get_batch_size(args.task)
+    if args.compile_model:
+        batch_size //= 2
+    if args.precision != "fp32":
+        batch_size *= 2
 
     logging.info("=" * 60)
     logging.info(f"🚀 Starting {args.task.upper()} Training Benchmark")
@@ -176,6 +189,12 @@ if __name__ == "__main__":
         "--compile_model",
         action="store_true",
         help="Compile the model using torch.compile",
+    )
+    parser.add_argument(
+        "--exp_name",
+        type=str,
+        default="gpu_benchmark",
+        help="The name of the log file.",
     )
 
     args = parser.parse_args()

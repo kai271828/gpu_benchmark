@@ -1,7 +1,8 @@
 #!/bin/bash
+EXP_NAME=${1:-"gpu_benchmark"}
 
-if [ -f "./benchmark.log" ]; then
-    rm ./benchmark.log
+if [ -f "./$EXP_NAME.log" ]; then
+    rm "./$EXP_NAME.log"
 fi
 
 for precision in fp32 fp16 bf16; do
@@ -10,20 +11,16 @@ for precision in fp32 fp16 bf16; do
             --task $task \
             --precision $precision \
             --device cuda \
-            --compile_model
+            --compile_model \
+            --exp_name "$EXP_NAME"
         echo ""
         echo ""
         python run_benchmark.py \
             --task $task \
             --precision $precision \
-            --device cuda
+            --device cuda \
+            --exp_name "$EXP_NAME"
         echo ""
         echo ""
     done
 done
-
-if [ $# -gt 0 ]; then
-    if [ -f "./benchmark.log" ]; then
-        mv ./benchmark.log "$1.log"
-    fi
-fi

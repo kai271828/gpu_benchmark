@@ -48,10 +48,15 @@ def get_batch_size(task):
     device = torch.cuda.current_device()
     gpu_memory_gb = torch.cuda.get_device_properties(device).total_memory / (1024**3)
 
+    if gpu_memory_gb <= 12:
+        memory_ratio = 0.5
+    else:  # Newer GPUs with more memory
+        memory_ratio = 0.6
+
     model_memory_requirements = {
-        "resnet": 50,  # ResNet-50: ~25MB per sample (25.6M parameters)
-        "swintransformer": 110,  # Swin-V2-T: ~30MB per sample (28.4M parameters, smaller than base)
-        "vit": 100,  # ViT-B-16: ~35MB per sample (86.6M parameters)
+        "resnet": 50,
+        "swintransformer": 120,
+        "vit": 100,
     }
 
     if task not in model_memory_requirements:
@@ -59,13 +64,13 @@ def get_batch_size(task):
     else:
         memory_per_sample = model_memory_requirements[task]
 
-    available_memory_gb = gpu_memory_gb * 0.75  # Use 75% of total memory
+    available_memory_gb = gpu_memory_gb * memory_ratio
     available_memory_mb = available_memory_gb * 1024
 
     # Calculate maximum batch size
     max_batch_size = int(available_memory_mb / memory_per_sample)
 
-    optimal_batch_size = max(min(max_batch_size, 256), 1)
+    optimal_batch_size = max(min(max_batch_size, 128), 1)
 
     # Round down to nearest power of 2 for optimal GPU performance
     if optimal_batch_size >= 2:
