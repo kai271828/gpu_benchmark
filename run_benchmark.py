@@ -87,9 +87,7 @@ def main(args):
         if torch.cuda.is_available():
             torch.cuda.synchronize()
 
-    scaler = (
-        GradScaler(device.split(":")[0]) if args.precision in ["fp16", "bf16"] else None
-    )
+    scaler = GradScaler("cuda") if args.precision in ["fp16", "bf16"] else None
 
     # Determine autocast dtype
     autocast_dtype = None
