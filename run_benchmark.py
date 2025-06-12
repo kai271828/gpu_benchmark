@@ -3,7 +3,8 @@ import logging
 import time
 import numpy as np
 import torch
-from torch.amp import autocast, GradScaler
+from torch.amp import autocast
+from torch.cuda.amp import GradScaler
 
 
 from utils import (
