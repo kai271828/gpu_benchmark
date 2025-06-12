@@ -131,34 +131,53 @@ run_benchmark.bat [YOUR_EXPERIMENT_NAME]
 ## Reference Result
 Remember the performance may differ on different machines due to various hardware factors including CPU, RAM, storage, and system configuration.
 
-| GPU Model | Memory (GB) | Precision | Compile | ResNet50 (samples/sec) | ViT-S (samples/sec) | Swin-v2-T (samples/sec) |
-|-----------|-------------|-----------|---------|----------------------|-------------------|------------------------|
-| **GTX 1080 Ti** | 11 | FP32 | No | - | - | - |
-| | | FP32 | Yes | - | - | - |
-| | | FP16 | No | - | - | - |
-| | | FP16 | Yes | - | - | - |
-| **RTX 2080 Ti** | 11 | FP32 | No | - | - | - |
-| | | FP32 | Yes | - | - | - |
-| | | FP16 | No | - | - | - |
-| | | FP16 | Yes | - | - | - |
-| **RTX 3090 Ti** | 24 | FP32 | No | - | - | - |
-| | | FP32 | Yes | - | - | - |
-| | | FP16 | No | - | - | - |
-| | | FP16 | Yes | - | - | - |
-| | | BF16 | No | - | - | - |
-| | | BF16 | Yes | - | - | - |
-| **Tesla V100** | 32 | FP32 | No | - | - | - |
-| | | FP32 | Yes | - | - | - |
-| | | FP16 | No | - | - | - |
-| | | FP16 | Yes | - | - | - |
-| | | BF16 | No | - | - | - |
-| | | BF16 | Yes | - | - | - |
+### Performance Benchmarks (samples/sec)
 
-*Note: Results are measured in samples processed per second during training. Higher values indicate better performance.*
+| GPU Model | VRAM | Precision | Compile | ResNet50 | ViT-S | Swin-v2-T |
+|-----------|------|-----------|---------|----------|-------|-----------|
+| **GTX 1080 Ti** | 11GB | | | | | |
+| | | FP32 | ❌ | 186.04 | 45.50 | 93.97 |
+| | | FP16 | ❌ | 228.17 | 56.68 | 99.42 |
+| **RTX 2080 Ti** | 11GB | | | | | |
+| | | FP32 | ❌ | 285.70 | 87.43 | 162.64 |
+| | | FP32 | ✅ | 290.70 | 86.64 | 207.21 |
+| | | FP16 | ❌ | 632.09 | 252.88 | 243.74 |
+| | | FP16 | ✅ | 837.97 | 265.70 | 457.09 |
+| **RTX 3090 Ti** | 24GB | | | | | |
+| | | FP32 | ❌ | 556.69 | 198.40 | 325.77 |
+| | | FP32 | ✅ | 626.94 | 214.42 | 461.40 |
+| | | FP16 | ❌ | 988.34 | 432.91 | 414.51 |
+| | | FP16 | ✅ | 1,300.40 | 489.87 | 836.21 |
+| | | BF16 | ❌ | 909.60 | 427.35 | 411.41 |
+| | | BF16 | ✅ | 1,385.43 | 492.30 | 655.00 |
+| **Tesla T4** | 16GB | | | | | |
+| | | FP32 | ❌ | 98.94 | 29.07 | 62.33 |
+| | | FP32 | ✅ | 108.49 | 30.14 | N/A |
+| | | FP16 | ❌ | 215.27 | 118.35 | 112.28 |
+| | | FP16 | ✅ | 358.73 | 136.05 | N/A |
+| **Tesla P100** | 16GB | | | | | |
+| | | FP32 | ❌ | N/A | N/A | N/A |
+| | | FP32 | ✅ | N/A | N/A | N/A |
+| | | FP16 | ❌ | N/A | N/A | N/A |
+| | | FP16 | ✅ | N/A | N/A | N/A |
+| **Tesla V100** | 32GB | | | | | |
+| | | FP32 | ❌ | 368.26 | 105.07 | 209.90 |
+| | | FP32 | ✅ | 392.08 | 110.09 | 271.49 |
+| | | FP16 | ❌ | 779.25 | 384.17 | 355.81 |
+| | | FP16 | ✅ | 1066.69 | 439.50 | 709.32 |
 
-- **Compile**: Whether PyTorch model compilation is enabled (torch.compile)
-- **Precision**: FP32 (32-bit), FP16 (16-bit), BF16 (Brain Float 16-bit)
+### Legend
+- **Compile**: PyTorch model compilation status
+  - ✅ = torch.compile enabled
+  - ❌ = torch.compile disabled
+- **Precision Types**:
+  - **FP32**: 32-bit floating point
+  - **FP16**: 16-bit floating point (Half precision)
+  - **BF16**: Brain Float 16-bit (Ampere+ architecture)
+- **N/A**: Data not available or not tested
+- **Results**: Measured in samples (3×224×224 images) processed per second during training
 
+> 📊 **Higher values indicate better performance**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -236,33 +255,3 @@ Use this space to list resources you find helpful and would like to give credit 
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-<!-- [contributors-shield]: https://img.shields.io/github/contributors/kai271828/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/kai271828/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/kai271828/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/kai271828/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/kai271828/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/kai271828/Best-README-Template/stargazers
-[issues-shield]: https://img.shields.io/github/issues/kai271828/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/kai271828/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/kai271828/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/kai271828/Best-README-Template/blob/master/LICENSE.txt
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/kai271828
-[product-screenshot]: images/screenshot.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
-[React-url]: https://reactjs.org/
-[Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
-[Vue-url]: https://vuejs.org/
-[Angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
-[Angular-url]: https://angular.io/
-[Svelte.dev]: https://img.shields.io/badge/Svelte-4A4A55?style=for-the-badge&logo=svelte&logoColor=FF3E00
-[Svelte-url]: https://svelte.dev/
-[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
-[Laravel-url]: https://laravel.com
-[Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
-[Bootstrap-url]: https://getbootstrap.com
-[JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
-[JQuery-url]: https://jquery.com  -->
