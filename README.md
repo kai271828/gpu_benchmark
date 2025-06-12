@@ -188,9 +188,9 @@ Remember the performance may differ on different machines due to various hardwar
 - **Results**: Measured in samples (3×224×224 images) processed per second during training
 
 > 📊 **Higher values indicate better performance**
-![Alt text](images/resnet.png)
-![Alt text](images/swin.png)
-![Alt text](images/vit.png)
+![Alt text](figures/resnet.png)
+![Alt text](figures/swin.png)
+![Alt text](figures/vit.png)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
