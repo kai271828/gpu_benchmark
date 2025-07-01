@@ -58,13 +58,13 @@ def main(args):
     logging.info(f"🎯 Precision: {args.precision}")
     if args.device.startswith("cuda") and torch.cuda.is_available():
         device_info = f"{args.device} ({torch.cuda.get_device_name(args.device)})"
-    elif args.device == "cpu":
+        device = args.device
+    else:
         import platform
 
         cpu_info = platform.processor() or platform.machine()
         device_info = f"cpu ({cpu_info})"
-    else:
-        device_info = args.device
+        device = "cpu"
     logging.info(f"💻 Device: {device_info}")
     logging.info(f"⚡ Compile Model: {args.compile_model}")
     logging.info("=" * 60)
@@ -73,7 +73,7 @@ def main(args):
     model = get_model(args.task, args.compile_model)
     optimizer = get_optimizer(model)
     criterion = get_criterion()
-    device = args.device
+
     time_record = []
 
     model = model.to(device)
