@@ -4,7 +4,11 @@ import time
 import numpy as np
 import torch
 from torch.amp import autocast
-from torch.cuda.amp import GradScaler
+
+try:
+    from torch.amp import GradScaler
+except ImportError:
+    from torch.cuda.amp import GradScaler
 
 
 from utils import (
@@ -14,6 +18,16 @@ from utils import (
     get_criterion,
     get_batch_size,
 )
+
+
+def create_scaler(precision):
+    if precision not in ["fp16", "bf16"]:
+        return None
+
+    try:
+        return GradScaler(device="cuda")
+    except TypeError:
+        return GradScaler()
 
 
 def main(args):
@@ -87,7 +101,7 @@ def main(args):
         if torch.cuda.is_available():
             torch.cuda.synchronize()
 
-    scaler = GradScaler("cuda") if args.precision in ["fp16", "bf16"] else None
+    scaler = create_scaler(args.precision)
 
     # Determine autocast dtype
     autocast_dtype = None
