@@ -110,15 +110,18 @@ def main(args):
     elif args.precision == "bf16":
         autocast_dtype = torch.bfloat16
 
+    if torch.cuda.is_available():
+        start_event = torch.cuda.Event(enable_timing=True)
+        end_event = torch.cuda.Event(enable_timing=True)
+
     epoch_start_time = time.time()
     for idx, (inputs, targets) in enumerate(data_loader):
         inputs, targets = inputs.to(device=device), targets.to(device=device)
 
-        # Synchronize GPU before timing
         if torch.cuda.is_available():
-            torch.cuda.synchronize()
-
-        start_time = time.time()
+            start_event.record()
+        else:
+            start_time = time.time()
 
         # Use autocast for forward pass
         with autocast(
@@ -143,11 +146,13 @@ def main(args):
             loss.backward()
             optimizer.step()
 
-        # Synchronize GPU after timing
         if torch.cuda.is_available():
+            end_event.record()
             torch.cuda.synchronize()
+            elapsed_time = start_event.elapsed_time(end_event) / 1000.0  # 转换为秒
+        else:
+            elapsed_time = time.time() - start_time
 
-        elapsed_time = time.time() - start_time
         time_record.append(elapsed_time)
 
     epoch_end_time = time.time()
